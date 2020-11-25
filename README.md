@@ -54,9 +54,9 @@ PATCH http://www.example.com/customers/12345
 PATCH http://www.example.com/customers/12345/orders/98765  
 PATCH http://www.example.com/buckets/secret_stuff  
 
-# References
 
 [1]:https://www.restapitutorial.com/lessons/httpmethods.html
 [2]:https://restfulapi.net/idempotent-rest-apis/
 [3]:https://nullbeans.com/using-put-vs-patch-when-building-a-rest-api-in-spring/
 [4]:https://www.javadevjournal.com/spring/rest/http-put-vs-http-patch-in-a-rest-api/
+[5]:https://www.logicbig.com/tutorials/spring-framework/spring-web-mvc/http-patch-test.html

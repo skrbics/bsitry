@@ -156,7 +156,35 @@ public class NutritionControllerTest {
     }
 
     @Test
-    public void updatePartialFood() {
+    public void updatePartialFood() throws Exception {
+
+        mockMvc.perform(patch("/api/nutrition/update-partial-food/1")
+                .param("name", "organic-egg")
+                .param("nutrition.calories", "220")
+                .param("nutrition.carbohydrate", "50")
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id").value(1L))
+                .andExpect(jsonPath("$.name").value("organic-egg"))
+                .andExpect(jsonPath("$.nutrition.servingSize").value("GRAM"))
+                .andExpect(jsonPath("$.nutrition.calories").value(220))
+                .andExpect(jsonPath("$.nutrition.fat").value((15)))
+                .andExpect(jsonPath("$.nutrition.carbohydrate").value((50)))
+                .andExpect(jsonPath("$.nutrition.protein").value((25)))
+                .andExpect(jsonPath("$.description").value("my favourite"))
+                .andReturn();
+    }
+
+    @Test
+    public void updatePartialFoodInvalidParameter() throws Exception {
+
+        mockMvc.perform(patch("/api/nutrition/update-partial-food/1")
+                .param("name", "organic-egg")
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isNoContent())
+                .andReturn();
     }
 
     public static String asJsonString(final Object obj) {
