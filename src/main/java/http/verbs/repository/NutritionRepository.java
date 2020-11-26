@@ -4,11 +4,13 @@ import http.verbs.entity.Food;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
  * @author Suleyman Yildirim
  */
 @Repository
-public interface FoodRepository extends CrudRepository<Food, Long> {
+public interface NutritionRepository extends CrudRepository<Food, Long> {
+    Object findAll(List<Food> foodList);
 }

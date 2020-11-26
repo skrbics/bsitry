@@ -4,7 +4,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import http.verbs.entity.Food;
 import http.verbs.entity.Nutrition;
 import http.verbs.entity.ServingSize;
-import http.verbs.repository.FoodRepository;
+import http.verbs.repository.NutritionRepository;
+import http.verbs.service.NutritionService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
@@ -20,6 +21,8 @@ import org.springframework.web.context.WebApplicationContext;
 
 import java.util.Optional;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -34,7 +37,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class NutritionControllerTest {
 
     @MockBean
-    private FoodRepository foodRepository;
+    private NutritionRepository nutritionRepository;
+
+    @MockBean
+    private NutritionService nutritionService;
 
     @Autowired
     private MockMvc mockMvc;
@@ -44,6 +50,17 @@ public class NutritionControllerTest {
 
     @Before
     public void setUp() throws Exception {
+        mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
+    }
+
+    @BeforeEach
+    public void init() throws Exception {
+        nutritionRepository.deleteAll();
+    }
+
+    @Test
+    public void getFood() throws Exception {
+
         Food food1 = Food.builder()
                 .id(1L)
                 .name("egg")
@@ -57,32 +74,8 @@ public class NutritionControllerTest {
                 .description(java.util.Optional.of("my favourite"))
                 .build();
 
-        Food food2 = Food.builder()
-                .id(2L)
-                .name("beef")
-                .nutrition(Nutrition.builder()
-                        .calories(300)
-                        .carbohydrate(15)
-                        .fat(30)
-                        .protein(55)
-                        .servingSize(ServingSize.GRAM)
-                        .build())
-                .build();
-//        when(foodRepository.save(food1)).thenReturn(food1);
-//        when(foodRepository.save(food2)).thenReturn(food2);
-        when(foodRepository.findById(1L)).thenReturn(Optional.ofNullable(food1));
-        when(foodRepository.findById(2L)).thenReturn(Optional.ofNullable(food2));
-        mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
-    }
+        when(nutritionService.getFood(1L)).thenReturn(Optional.ofNullable(food1));
 
-    @BeforeEach
-    public void init() throws Exception {
-        foodRepository.deleteAll();
-
-    }
-
-    @Test
-    public void getFood() throws Exception {
         mockMvc.perform(get("/api/nutrition/get-food/1")
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
@@ -111,6 +104,9 @@ public class NutritionControllerTest {
                         .servingSize(ServingSize.GRAM)
                         .build())
                 .build();
+
+        when(nutritionService.createFood(any(Food.class))).thenReturn(Optional.of(food));
+
         mockMvc.perform(post("/api/nutrition/create-new-food")
                 .content(asJsonString(food))
                 .contentType(MediaType.APPLICATION_JSON)
@@ -128,7 +124,20 @@ public class NutritionControllerTest {
 
     @Test
     public void updateFood() throws Exception {
-        Food food2 = Food.builder()
+
+        Food food = Food.builder()
+                .id(2L)
+                .name("beef")
+                .nutrition(Nutrition.builder()
+                        .calories(260)
+                        .carbohydrate(10)
+                        .fat(25)
+                        .protein(50)
+                        .servingSize(ServingSize.GRAM)
+                        .build())
+                .build();
+
+        Food foodUpdated = Food.builder()
                 .id(2L)
                 .name("beef-light")
                 .nutrition(Nutrition.builder()
@@ -140,8 +149,11 @@ public class NutritionControllerTest {
                         .build())
                 .build();
 
+        when(nutritionService.createFood(any(Food.class))).thenReturn(Optional.of(food));
+        when(nutritionService.updateFood(any(Food.class))).thenReturn(Optional.of(foodUpdated));
+
         mockMvc.perform(put("/api/nutrition/update-existing-food/{id}", 2)
-                .content(asJsonString(food2))
+                .content(asJsonString(foodUpdated))
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
@@ -157,6 +169,34 @@ public class NutritionControllerTest {
 
     @Test
     public void updatePartialFood() throws Exception {
+        Food food = Food.builder()
+                .id(1L)
+                .name("egg")
+                .nutrition(Nutrition.builder()
+                        .calories(200)
+                        .carbohydrate(55)
+                        .fat(15)
+                        .protein(25)
+                        .servingSize(ServingSize.GRAM)
+                        .build())
+                .description(java.util.Optional.of("my favourite"))
+                .build();
+
+        Food foodPartialUpdate = Food.builder()
+                .id(1L)
+                .name("organic-egg")
+                .nutrition(Nutrition.builder()
+                        .calories(220)
+                        .carbohydrate(50)
+                        .fat(15)
+                        .protein(25)
+                        .servingSize(ServingSize.GRAM)
+                        .build())
+                .description(java.util.Optional.of("my favourite"))
+                .build();
+
+        when(nutritionService.createFood(any(Food.class))).thenReturn(Optional.of(food));
+        when(nutritionService.updatePartialFood(any(Food.class))).thenReturn(Optional.of(foodPartialUpdate));
 
         mockMvc.perform(patch("/api/nutrition/update-partial-food/1")
                 .param("name", "organic-egg")
@@ -173,17 +213,6 @@ public class NutritionControllerTest {
                 .andExpect(jsonPath("$.nutrition.carbohydrate").value((50)))
                 .andExpect(jsonPath("$.nutrition.protein").value((25)))
                 .andExpect(jsonPath("$.description").value("my favourite"))
-                .andReturn();
-    }
-
-    @Test
-    public void updatePartialFoodInvalidParameter() throws Exception {
-
-        mockMvc.perform(patch("/api/nutrition/update-partial-food/1")
-                .param("name", "organic-egg")
-                .contentType(MediaType.APPLICATION_JSON)
-                .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isNoContent())
                 .andReturn();
     }
 
