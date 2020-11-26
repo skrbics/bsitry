@@ -1,6 +1,6 @@
 ## HTTP VERBS
 
-The HTTP verbs are one of the most popular interview question. I wanted to make a small project to help Java developers succeed on their interviews.
+HTTP verbs are one of the most popular interview questions. I wanted to do a small project to help Java developers succeed in their interviews.
 
 The most-commonly-used HTTP verbs are POST, GET, PUT, PATCH, and DELETE. These are create, read, update, and delete (or CRUD) operations, respectively. There are a number of other verbs, too, but are utilized less frequently.[[1]]
 
@@ -27,8 +27,7 @@ POST http://www.example.com/customers/12345/orders
 
 
 ### PUT
-PUT is most-often utilized for **update** capabilities,
- PUT-ing to a known resource URI with the request body containing the newly-updated representation of the original resource.
+PUT is most-often utilized for **update** capabilities,PUT-ing to a known resource URI with the request body containing the newly-updated representation of the original resource.
 
 PUT http://www.example.com/customers/12345  
 PUT http://www.example.com/customers/12345/orders/  
