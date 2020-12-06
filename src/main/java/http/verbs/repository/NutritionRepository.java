@@ -12,5 +12,4 @@ import java.util.Optional;
  */
 @Repository
 public interface NutritionRepository extends CrudRepository<Food, Long> {
-    Object findAll(List<Food> foodList);
 }

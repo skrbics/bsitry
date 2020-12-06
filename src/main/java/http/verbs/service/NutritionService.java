@@ -41,8 +41,7 @@ public class NutritionService implements INutritionService {
         if (optionalFood.isPresent()) {
             throw new HttpClientErrorException(HttpStatus.CONFLICT);
         }
-        Food save = nutritionRepository.save(food);
-        return Optional.of(save);
+        return Optional.of(nutritionRepository.save(food));
     }
 
     @Override
