@@ -1,6 +1,11 @@
+## INTRODUCTION  
+
+Step by step explanation of this project is in my [blog](https://suleymanyildirim.org/java/testing-http-methods-using-mockito-framework).  
+If you are not familiar with the Unit Testing in Spring Boot, I advice you to read my article on [Medium](https://medium.com/@fitsoftwareengineer/test-driven-development-in-spring-boot-using-pyramid-approach-beebdfb8beb0).  
+
 ## HTTP VERBS
 
-HTTP verbs are one of the most popular interview questions. I wanted to do a small project to help Java developers succeed in their interviews.
+HTTP verbs are one of the most popular interview questions. I wanted to do a small project to help Java developers succeed in their interviews.  
 
 The most-commonly-used HTTP verbs are POST, GET, PUT, PATCH, and DELETE. These are create, read, update, and delete (or CRUD) operations, respectively. There are a number of other verbs, too, but are utilized less frequently.[[1]]
 
