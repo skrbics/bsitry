@@ -1,6 +1,9 @@
 ## HTTP VERBS
 
-HTTP verbs are one of the most popular interview questions. I wanted to do a small project to help Java developers succeed in their interviews.
+For more details: https://suleymanyildirim.org/java/testing-http-methods-using-mockito-framework/  
+Test-Driven Development in Spring Boot using Pyramid Approach: https://medium.com/@fitsoftwareengineer/test-driven-development-in-spring-boot-using-pyramid-approach-beebdfb8beb0  
+
+HTTP verbs are one of the most popular interview questions. I wanted to do a small project to help Java developers succeed in their interviews.  
 
 The most-commonly-used HTTP verbs are POST, GET, PUT, PATCH, and DELETE. These are create, read, update, and delete (or CRUD) operations, respectively. There are a number of other verbs, too, but are utilized less frequently.[[1]]
 
