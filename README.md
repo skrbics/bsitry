@@ -1,7 +1,9 @@
-## HTTP VERBS
+## INTRODUCTION  
 
-For more details: https://suleymanyildirim.org/java/testing-http-methods-using-mockito-framework/  
-Test-Driven Development in Spring Boot using Pyramid Approach: https://medium.com/@fitsoftwareengineer/test-driven-development-in-spring-boot-using-pyramid-approach-beebdfb8beb0  
+Step by step explanation: [Blog Post](https://suleymanyildirim.org/java/testing-http-methods-using-mockito-framework).  
+If you are not familiar with the Unit Testing in Spring Boot, I advice my article on [Medium](https://medium.com/@fitsoftwareengineer/test-driven-development-in-spring-boot-using-pyramid-approach-beebdfb8beb0).  
+
+## HTTP VERBS
 
 HTTP verbs are one of the most popular interview questions. I wanted to do a small project to help Java developers succeed in their interviews.  
 
