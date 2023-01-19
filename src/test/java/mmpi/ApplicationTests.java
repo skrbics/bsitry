@@ -1,4 +1,4 @@
-package http.verbs;
+package mmpi;
 import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 

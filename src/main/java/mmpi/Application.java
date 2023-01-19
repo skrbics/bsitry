@@ -2,7 +2,7 @@
  * @author Suleyman Yildirim
  */
 
-package http.verbs;
+package mmpi;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 

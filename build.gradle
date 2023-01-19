@@ -2,7 +2,6 @@ plugins {
     id 'java'
     id 'org.springframework.boot' version '2.4.0'
     id 'io.spring.dependency-management' version '1.0.10.RELEASE'
-    id "io.freefair.lombok" version "5.3.0"
 }
 
 group 'org.example'
@@ -19,9 +18,10 @@ dependencies {
 //    compile('org.apache.tomcat.embed:tomcat-embed-jasper:8.0.47')
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-test'
     runtimeOnly 'com.h2database:h2'
     implementation 'junit:junit:4.12'
-//    compile group: 'org.openapitools', name: 'jackson-databind-nullable', version: '0.2.1'
-    testCompile group: 'junit', name: 'junit', version: '4.12'
-    testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: '2.4.0'
+    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.2'
+
+
 }
