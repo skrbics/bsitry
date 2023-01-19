@@ -1,0 +1,6 @@
+mmpi/controller/TestCardControllerTest.java
+ mmpi.controller.TestCardControllerTest
+mmpi/ApplicationTests.java
+ mmpi.ApplicationTests
+mmpi/service/TestCardServiceTest.java
+ mmpi.service.TestCardServiceTest
